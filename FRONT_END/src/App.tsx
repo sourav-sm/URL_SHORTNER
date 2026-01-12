@@ -1,6 +1,6 @@
 import './App.css'
 import { Body } from './componets/body'
-import {Footer} from './componets/Footer'
+import {Footer} from './componets/footer'
 import { Header } from './componets/header'
 
 function App() {
