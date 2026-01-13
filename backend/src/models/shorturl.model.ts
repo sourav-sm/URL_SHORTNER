@@ -1,24 +1,24 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const shortUrlSchema=new mongoose.Schema({
+const shortUrlSchema=new Schema({
     full_url:{
         type:String,
-        require:true
+        required:true
     },
     short_url:{
         type:String,
-        require:true,
+        required:true,
         index:true,//for better searching using indexing
         unique:true
     },
     clicks:{
         type:Number,
-        require:true,
+        required:true,
         default:0
     },
     user:{
-        type:mongoose.Schema.Types.ObjectId,
-        require:true
+        type:Schema.Types.ObjectId,
+        ref:"User"
     }
 });
 
