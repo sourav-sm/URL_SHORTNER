@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { nanoid } from "nanoid";
 import connectDB from "./config/mongo.config.js";
 import short_url from "./models/shorturl.model.js";
+import shortUrlRoutes from "./routes/shorturl.route.js";
 
 
 dotenv.config();
@@ -20,27 +21,7 @@ res.send(nanoid(7));
 });
 
 //creat api for new url
-app.post("/api/create",async (req,res)=>{
-  try {
-      const {full_url}=req.body;
-
-    if(!full_url){
-      res.status(400).json({message:"full_url is required"});
-    }
-
-    const shortId=nanoid(7);
-
-    const newUrl=await short_url.create({
-      full_url,
-      short_url:shortId,
-    });
-
-    res.status(201).json(newUrl);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({message:"Server Error"})
-  }
-});
+app.use("/api",shortUrlRoutes);
 
 //redirection url
 app.get("/:id",async(req,res)=>{
