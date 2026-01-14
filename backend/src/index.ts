@@ -2,9 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import { nanoid } from "nanoid";
 import connectDB from "./config/mongo.config.js";
-import short_url from "./models/shorturl.model.js";
 import shortUrlRoutes from "./routes/shorturl.route.js";
-
+import { redirectFromShorturl } from "./controller/shorturl.controller.js";
 
 dotenv.config();
 
@@ -24,16 +23,7 @@ res.send(nanoid(7));
 app.use("/api",shortUrlRoutes);
 
 //redirection url
-app.get("/:id",async(req,res)=>{
-  const {id}=req.params;
-  const url=await short_url.findOne({short_url:id});
-
-  if(url){
-    res.redirect(url.full_url);
-  }else{
-    res.status(404).send("url not found");
-  }
-})
+app.get("/:id",redirectFromShorturl);
 
 
 const port = Number(process.env.PORT) || 3000;

@@ -12,7 +12,7 @@ const shortUrlSchema=new Schema({
         unique:true
     },
     clicks:{
-        type:Number,
+        type:Number, 
         required:true,
         default:0
     },
