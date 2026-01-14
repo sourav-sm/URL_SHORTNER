@@ -4,10 +4,18 @@ import { nanoid } from "nanoid";
 import connectDB from "./config/mongo.config.js";
 import shortUrlRoutes from "./routes/shorturl.route.js";
 import { redirectFromShorturl } from "./controller/shorturl.controller.js";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
+app.use(
+  cors({
+      origin:"http://localhost:5173",
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      credentials: true,
+  })
+)
 app.use(express.json());
 
 //connect db
