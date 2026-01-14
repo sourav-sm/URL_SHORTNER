@@ -1,6 +1,7 @@
 import { createShortUrlService,redirectFromShorturlService } from "../services/shorturl.service.js"
 import type { Request,Response } from "express";
 
+
 export const createShorturl = async (
   req: Request,
   res: Response
@@ -14,7 +15,18 @@ export const createShorturl = async (
 
     const newUrl = await createShortUrlService(full_url);
 
-    return res.status(201).json(newUrl);
+    const appUrl=process.env.APP_URL;
+
+    if(!appUrl){
+      throw new Error("APP_URL IS NOT DEFINED");
+    }
+
+    const newShortUrl=`${appUrl}/${newUrl.short_url}`
+    console.log(newShortUrl);
+    return res.status(201).json({
+      full_url,
+      newShortUrl
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Server Error" });
