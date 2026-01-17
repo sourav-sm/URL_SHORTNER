@@ -4,6 +4,7 @@ import { PiScissorsFill } from "react-icons/pi";
 import { Box } from "./box";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 export const Body = () => {
   const [longUrl, setLongUrl] = useState("");
@@ -56,9 +57,9 @@ export const Body = () => {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(shortUrl);
-      alert("Short URL copied to clipboard!");
+      toast.success("Short URL copied to clipboard 🚀");
     } catch {
-      alert("Failed to copy URL");
+      toast.error("Failed to copy URL");
     }
   };
 

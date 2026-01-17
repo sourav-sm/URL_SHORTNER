@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast'
 import './App.css'
 import { Body } from './componets/body'
 import {Footer} from './componets/footer'
@@ -7,6 +8,7 @@ function App() {
 
   return (
     <div>
+    <Toaster position="top-center" reverseOrder={false} />
         <div>
             <Header/>
         </div>
