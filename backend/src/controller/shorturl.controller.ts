@@ -24,7 +24,7 @@ export const createShorturl = async (
     const newShortUrl=`${appUrl}/${newUrl.short_url}`
     console.log(newShortUrl);
     return res.status(201).json({
-      full_url,
+      // full_url,
       newShortUrl
     });
   } catch (error) {
